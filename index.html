@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Dashboard">
+    <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--bootstrap links-->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <title>Bus Tracking</title>
+    <!--link(rel='stylesheet', href='css/font-awesome/css/font-awesome.min.css')-->
+    <!-- css style link-->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/style-responsive.css">
+    <!--dataTables links-->
+    <link rel="stylesheet" type="text/css" href="css/buttons.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.min.css">
+    <!--font-family-->
+    <link href="css/font.css" rel="stylesheet">
+    <!--barcharts css-->
+    <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+    <style>
+      .tab {
+          overflow: hidden;
+          border: 1px solid #ccc;
+          background-color: skyblue;
+          color:white;
+      }
+      .tab button {
+          background-color: inherit;
+          float: left;
+          border: none;
+          width:100%;
+          outline: none;
+          cursor: pointer;
+          padding: 14px 16px;
+          transition: 0.3s;
+          font-size: 17px;
+          border-left:1px solid #ccc;
+      }
+      .tab button:hover {
+          background-color: white;
+          color:skyblue;
+          font-weight:bold;
+      }
+      .tab button:focus {
+          background-color: white;
+          color:skyblue;
+          font-weight:bold;
+      }
+      .tab .active button {
+          background-color: white;
+          color:skyblue;
+          font-weight:bold;
+      }
+      #chartdiv {
+        width: 100%;
+        height: 500px;
+      }
+
+      .amcharts-export-menu-top-right {
+        top: 10px;
+        right: 0;
+      }
+      #chart {
+        width: 100%;
+        height: 500px;
+        font-size: 11px;
+      }
+
+      .amcharts-pie-slice {
+        transform: scale(1);
+        transform-origin: 50% 50%;
+        transition-duration: 0.3s;
+        transition: all .3s ease-out;
+        -webkit-transition: all .3s ease-out;
+        -moz-transition: all .3s ease-out;
+        -o-transition: all .3s ease-out;
+        cursor: pointer;
+        box-shadow: 0 0 30px 0 #000;
+      }
+
+      .amcharts-pie-slice:hover {
+        transform: scale(1.1);
+        filter: url(#shadow);
+      }             
+    </style>
+  </head>
+  <body>
+      <div id="personaldata" class="tab-pane fade in active">
+        <div style="width:100%" class="container">
+          <ul class="nav nav-tabs nav-justified tab">
+            <li class="active">
+              <button data-toggle="pill" href="#Data">Data</button>
+            </li>
+            <li>
+              <button data-toggle="pill" href="#Graphs">Graphs</button>
+            </li>
+          </ul>
+          <div class="tab-content">
+            <div id="Graphs" class="tab-pane fade align">
+              <ul class="nav nav-tabs nav-justified tab">
+                <li class="active">
+                  <button data-toggle="pill" href="#barChart">Bar Chart</button>
+                </li>
+                <li>
+                  <button data-toggle="pill" href="#piChart">Pi Chart</button>
+                </li>
+              </ul>
+
+              <div class="tab-content">
+                <div id="barChart" class="tab-pane fade in active">
+                  <div class="panel panel-default">
+                    <div class="panel-body">
+                      <div class="table-responsive">
+                        <div id="chartdiv"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div id="piChart" class="tab-pane fade align">
+                  <div class="panel panel-default">
+                    <div class="panel-body">
+                      <div class="table-responsive">
+                        <div id="chart"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+            <div id="Data" class="tab-pane fade in active">
+              <ul class="nav nav-tabs nav-justified tab">
+                <li class="active">
+                  <button data-toggle="pill" href="#1">1</button>
+                </li>
+                <li>
+                  <button data-toggle="pill" href="#2">2</button>
+                </li>
+                <li>
+                  <button data-toggle="pill" href="#3">3</button>
+                </li>
+              </ul>
+              <div class="tab-content">
+                <div id="1" class="tab-pane fade in active">
+                  <h3 class="text-center">TAB - 1</h3>
+                  <div class="panel panel-default">
+                    <div class="panel-body">
+                      <div class="table-responsive">
+                        <table id="dataTables1-example" class="table table-striped table-bordered table-hover">
+                          <thead>
+                            <tr>
+                              <th>1</th>
+                              <th>2</th>
+                              <th>3</th>
+                              <th>4</th>
+                              <th>5</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <td>null</td>
+                            <td>null</td>
+                            <td>null</td>
+                            <td>null</td>
+                            <td>null</td>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+              <div id="2" class="tab-pane fade align">
+                <h3 class="text-center">TAB - 2</h3>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                      <div class="table-responsive">
+                        <table id="dataTables2-example" class="table table-striped table-bordered table-hover">
+                          <thead>
+                            <tr>
+                              <th>1</th>
+                              <th>2</th>
+                              <th>3</th>
+                              <th>4</th>
+                              <th>5</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <td>null</td>
+                            <td>null</td>
+                            <td>null</td>
+                            <td>null</td>
+                            <td>null</td>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+              <div id="3" class="tab-pane fade align">
+                <h3 class="text-center">TAB - 3</h3>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                      <div class="table-responsive">
+                        <table id="dataTables3-example" class="table table-striped table-bordered table-hover">
+                          <thead>
+                            <tr>
+                              <th>1</th>
+                              <th>2</th>
+                              <th>3</th>
+                              <th>4</th>
+                              <th>5</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <td>null</td>
+                            <td>null</td>
+                            <td>null</td>
+                            <td>null</td>
+                            <td>null</td>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- js placed at the end of the document so the pages load faster-->
+    <!--dataTables scripts-->
+    <script src="js/jquery.dataTables.min.js"></script>
+    <script src="js/dataTables.buttons.min.js"></script>
+    <script src="js/buttons.flash.min.js"></script>
+    <script src="js/jszip.min.js"></script>
+    <script src="js/pdfmake.min.js"></script>
+    <script src="js/vfs_fonts.js"></script>
+    <script src="js/buttons.html5.min.js"></script>
+    <script src="js/buttons.print.min.js"></script>
+    <script>
+      $(document).ready(function () {
+      $('#dataTables1-example').dataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'copy',
+                title: 'Report'
+            },
+            {
+                extend: 'csvHtml5',
+                title: 'Report'
+            },
+            {
+                extend: 'excelHtml5',
+                title: 'Report'
+            },
+            {
+                extend: 'pdfHtml5',
+                title: 'Report'
+            },
+            {
+                extend: 'print',
+                title: 'Report'
+            }
+        ]
+      });
+      });
+    </script>
+    <script>
+      $(document).ready(function () {
+      $('#dataTables2-example').dataTable({
+        dom: 'Bfrtip',
+        buttons: [
+           {
+                extend: 'copy',
+                title: 'Report'
+            },
+            {
+                extend: 'csvHtml5',
+                title: 'Report'
+            },
+            {
+                extend: 'excelHtml5',
+                title: 'Report'
+            },
+            {
+                extend: 'pdfHtml5',
+                title: 'Report'
+            },
+            {
+                extend: 'print',
+                title: 'Report'
+            }
+        ]
+      });
+      });
+    </script>
+    <script>
+      $(document).ready(function () {
+      $('#dataTables3-example').dataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'copy',
+                title: 'Report'
+            },
+            {
+                extend: 'csvHtml5',
+                title: 'Report'
+            },
+            {
+                extend: 'excelHtml5',
+                title: 'Report'
+            },
+            {
+                extend: 'pdfHtml5',
+                title: 'Report'
+            },
+            {
+                extend: 'print',
+                title: 'Report'
+            }
+        ]
+      });
+      });
+    </script>
+    <script>
+      //custom select box
+      $(function(){
+      $('select.styled').customSelect();
+      });
+    </script>
+
+    <!-- js placed at the end of the document so the pages load faster-->
+    <!-- amchart scripts -->
+    <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+    <script src="https://www.amcharts.com/lib/3/serial.js"></script>
+    <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+    <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+    <script src="https://www.amcharts.com/lib/3/pie.js"></script>
+    <script>
+      var chart = AmCharts.makeChart("chartdiv", {
+      "type": "serial",
+      "theme": "light",
+      "marginRight": 70,
+      "dataProvider": [{
+      "country": "1",
+      "visits": 10,
+      "color": "#FF0F00"
+      }, {
+      "country": "2",
+      "visits": 20,
+      "color": "#FF6600"
+      }, {
+      "country": "3",
+      "visits": 30,
+      "color": "#FF9E01"
+      }, {
+      "country": "4",
+      "visits": 40,
+      "color": "#FCD202"
+      }, {
+      "country": "5",
+      "visits": 50,
+      "color": "#CD0D74"
+      }, {
+      "country": "6",
+      "visits": 60,
+      "color": "#FF6600"
+      }, {
+      "country": "7",
+      "visits": 70,
+      "color": "#FF9E01"
+      }, {
+      "country": "8",
+      "visits": 80,
+      "color": "#FCD202"
+      }, {
+      "country": "9",
+      "visits": 90,
+      "color": "#FF6600"
+      }, {
+      "country": "10",
+      "visits": 100,
+      "color": "#FF9E01"
+      }],
+      "valueAxes": [{
+      "axisAlpha": 0,
+      "position": "left",
+      "title": "WRITE YOUR TEXT HERE"
+      }],
+      "startDuration": 1,
+      "graphs": [{
+      "balloonText": "<b>[[category]]: [[value]]</b>",
+      "fillColorsField": "color",
+      "fillAlphas": 0.9,
+      "lineAlpha": 0.2,
+      "type": "column",
+      "valueField": "visits"
+      }],
+      "chartCursor": {
+      "categoryBalloonEnabled": false,
+      "cursorAlpha": 0,
+      "zoomable": false
+      },
+      "categoryField": "country",
+      "categoryAxis": {
+      "gridPosition": "start",
+      "labelRotation": 45
+      },
+      "export": {
+      "enabled": true
+      }
+      });
+    </script>
+    <script>
+      var chart = AmCharts.makeChart("chart", {
+      "type": "pie",
+      "startDuration": 0,
+      "theme": "light",
+      "addClassNames": true,
+      "legend":{
+      "position":"right",
+      "marginRight":100,
+      "autoMargins":false
+      },
+      "innerRadius": "30%",
+      "defs": {
+      "filter": [{
+      "id": "shadow",
+      "width": "200%",
+      "height": "200%",
+      "feOffset": {
+      "result": "offOut",
+      "in": "SourceAlpha",
+      "dx": 0,
+      "dy": 0
+      },
+      "feGaussianBlur": {
+      "result": "blurOut",
+      "in": "offOut",
+      "stdDeviation": 5
+      },
+      "feBlend": {
+      "in": "SourceGraphic",
+      "in2": "blurOut",
+      "mode": "normal"
+      }
+      }]
+      },
+      "dataProvider": [{
+      "example": "1",
+      "sample": 10
+      }, {
+      "example": "2",
+      "sample": 20
+      }, {
+      "example": "3",
+      "sample": 30
+      }, {
+      "example": "4",
+      "sample": 40
+      }, {
+      "example": "5",
+      "sample": 50
+      }, {
+      "example": "6",
+      "sample": 60
+      }, {
+      "example": "7",
+      "sample": 70
+      }, {
+      "example": "8",
+      "sample": 80
+      }, {
+      "example": "9",
+      "sample": 90
+      }, {
+      "example": "10",
+      "sample": 100
+      }],
+      "valueField": "sample",
+      "titleField": "example",
+      "export": {
+      "enabled": true
+      }
+      });
+
+      chart.addListener("init", handleInit);
+
+      chart.addListener("rollOverSlice", function(e) {
+      handleRollOver(e);
+      });
+
+      function handleInit(){
+      chart.legend.addListener("rollOverItem", handleRollOver);
+      }
+
+      function handleRollOver(e){
+      var wedge = e.dataItem.wedge.node;
+      wedge.parentNode.appendChild(wedge);
+      }
+    </script>
+  </body>
+</html>
